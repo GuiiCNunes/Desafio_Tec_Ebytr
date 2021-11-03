@@ -6,8 +6,8 @@ const DB_NAME = 'Ebytr';
 const { MongoClient } = require('mongodb');
 
 const OPTIONS = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 
 let db = null;
