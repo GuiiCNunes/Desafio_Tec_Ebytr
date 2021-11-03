@@ -31,7 +31,6 @@ describe('Model tests: ', () => {
   describe('Test if a task ', () => {
     it('inserted', async () => {
       const response = await tasksModel.create(payloads.taskToDb);
-      console.log(response);
       expect(response).to.be.an('object');
     });
     it('has _id', async () => {
@@ -50,5 +49,5 @@ describe('Model tests: ', () => {
       const response = await tasksModel.create(payloads.taskToDb);
       expect(response).to.have.a.property('status');
     });
-  })
+  });
 });
