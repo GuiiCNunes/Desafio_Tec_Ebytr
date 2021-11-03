@@ -1,17 +1,19 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const mongoConnection = require('../../src/model/connection');
 const tasksModel = require('../../src/model/tasksModel');
+
+const payloads = require('../payloadTasks');
 
 describe('Model tests: ', () => {
   before(async () => {
     const DBServer = new MongoMemoryServer();
     const URLMock = await DBServer.getUri();
 
-    connectionMock = await MongoClient
+    let connectionMock = await MongoClient
       .connect(URLMock, {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -27,24 +29,24 @@ describe('Model tests: ', () => {
   });
 
   describe('Test if a task ', () => {
-    it('inserted', () => {
-      const response = await tasksModel.create();
+    let response;
+
+    before( async () => {
+      response = await tasksModel.create(payloads.taskToDb);
+    });
+    it('inserted', async () => {
       expect(response).to.be.a('object');
     });
-    it('has _id', () => {
-      const response = await tasksModel.create();
+    it('has _id', async () => {
       expect(response).to.have.a.property('_id');
     });
-    it('has content', () => {
-      const response = await tasksModel.create();
+    it('has content', async () => {
       expect(response).to.have.a.property('content');
     });
-    it('has date', () => {
-      const response = await tasksModel.create();
+    it('has date', async () => {
       expect(response).to.have.a.property('date');
     });
-    it('has status', () => {
-      const response = await tasksModel.create();
+    it('has status', async () => {
       expect(response).to.have.a.property('status');
     });
   })

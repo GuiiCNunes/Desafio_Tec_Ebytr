@@ -6,4 +6,4 @@ const taskToDb = {
 
 module.exports = {
   taskToDb,
-}
+};
