@@ -11,6 +11,14 @@ const create = async (req, res, next) => {
   res.status(201).json(task);
 };
 
+const getAll = async (_req, res, _next) => {
+  const tasks = await tasksServices
+    .getAll();
+
+  res.status(200).json(tasks);
+};
+
 module.exports = {
   create,
+  getAll,
 };
