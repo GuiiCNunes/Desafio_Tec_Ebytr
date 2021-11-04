@@ -68,4 +68,40 @@ describe('Service tests:', () => {
       expect(response).to.have.a.property('date');
     });
   });
+
+  describe('Test delete task: ', () => {
+    describe('with exist id', () => {
+      before(() => {
+  
+        sinon.stub(tasksModel, 'deleteTask')
+          .resolves(payloads.correctDbReturnToDelete);
+      });
+    
+      after(() => {
+        tasksModel.deleteTask.restore();
+      });
+
+      it('altered database', async () => {
+        const response = await tasksServices.deleteTask(payloads.example_id);
+        expect(response).to.be.equal(true);
+      });
+    });
+    describe('with inexist id', () => {
+      before(() => {
+  
+        sinon.stub(tasksModel, 'deleteTask')
+          .resolves(payloads.incorrectDbReturnToDelete);
+      });
+    
+      after(() => {
+        tasksModel.deleteTask.restore();
+      });
+
+      it('dont\'t altered database', async () => {
+        const response = await tasksServices.deleteTask(payloads.example_id);
+        expect(response).to.be.equal(false);
+      });
+    });
+  });
+
 });

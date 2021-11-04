@@ -16,8 +16,15 @@ const getTaskById = async (id) => {
   return response;
 };
 
+const deleteTask = async (id) => {
+  const { result } = await tasksModel.deleteTask(id);
+  if (result.n) return true;
+  return false;
+};
+
 module.exports = {
   create,
   getAll,
   getTaskById,
+  deleteTask,
 };

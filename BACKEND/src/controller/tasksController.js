@@ -18,7 +18,15 @@ const getAll = async (_req, res, _next) => {
   res.status(200).json(tasks);
 };
 
+const deleteTask = async (req, res, next) => {
+  const { id } = req.body;
+  if (await tasksServices.deleteTask(id)) return res.status(200).end();
+
+  next({ code: 404, message: 'not found' });
+};
+
 module.exports = {
   create,
   getAll,
+  deleteTask,
 };
