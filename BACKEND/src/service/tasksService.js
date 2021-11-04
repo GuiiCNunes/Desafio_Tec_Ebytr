@@ -1,7 +1,8 @@
+const checkStatus = require('../helpers/checkStatus');
 const tasksModel = require('../model/tasksModel');
 
 const create = async ({ status, content, date }) => {
-  if (!status || !['pending', 'progress', 'ready'].includes(status)) return null;
+  if (checkStatus(status)) return null;
   const response = await tasksModel.create({ status, content, date });
   return response;
 };
@@ -22,9 +23,16 @@ const deleteTask = async (id) => {
   return false;
 };
 
+const update = async ({ id, status, content, date }) => {
+  const { result } = await tasksModel.update({ id, status, content, date });
+  if (result.n) return true;
+  return false;
+};
+
 module.exports = {
   create,
   getAll,
   getTaskById,
   deleteTask,
+  update,
 };

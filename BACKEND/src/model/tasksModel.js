@@ -17,9 +17,16 @@ const deleteTask = (id) => mongoConnection.getConnection()
   { _id: ObjectId(id) },
 ));
 
+const update = ({ id, status, content, date }) => mongoConnection.getConnection()
+  .then((db) => db.collection('tasks').updateOne(
+    { _id: ObjectId(id) },
+    { $set: { status, content, date } },
+  ));
+
 module.exports = {
   create,
   getAll,
   getTaskById,
   deleteTask,
+  update,
 };

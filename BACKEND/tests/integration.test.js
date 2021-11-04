@@ -128,4 +128,40 @@ describe('Integration tests: ', () => {
       expect(response.body).to.have.property('message');
     });
   });
+
+  describe('when a task updated', () => {
+    let response = {};
+    before(async () => {
+      const { _id: id } = await tasksServices.create(payloads.taskToDb);
+      
+      response = await chai.request(server)
+        .put('/tasks')
+        .send({ id, ...payloads.newTaskToDb });
+    });
+
+    it('return http code 200', () => {
+      expect(response).to.have.status(200);
+    });
+  });
+  describe('when a task aren\'t updated', () => {
+    let response = {};
+
+    before(async () => {
+      response = await chai.request(server)
+        .put('/tasks')
+        .send({ id: payloads.example_id });
+    });
+
+    it('return http code 404', () => {
+      expect(response).to.have.status(404);
+    });
+
+    it('return an object', () => {
+      expect(response.body).to.be.a('object');
+    });
+
+    it('the object has a property message', () => {
+      expect(response.body).to.have.property('message');
+    });
+  });
 });
