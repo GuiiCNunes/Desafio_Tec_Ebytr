@@ -25,10 +25,15 @@ const allTasks = [
   taskReturnedForDb,
 ];
 
+const correctDbReturnToDelete = { result: { n: 1, ok: 1 } };
+const incorrectDbReturnToDelete = { result: { n: 0, ok: 0 } };
+
 module.exports = {
   taskToDb,
   taskReturnedForDb,
   taskToDbWithOutStatus,
   allTasks,
   example_id,
+  correctDbReturnToDelete,
+  incorrectDbReturnToDelete,
 };
