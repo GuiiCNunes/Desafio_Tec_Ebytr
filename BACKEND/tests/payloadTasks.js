@@ -4,6 +4,12 @@ const taskToDb = {
   status: 'pending',
 };
 
+const taskToDbWithOutStatus = {
+  content: 'Make a beatiful task',
+  date: Date.now(),
+  status: 'launch',
+};
+
 const taskReturnedForDb = {
   _id: '6182fdfbfe472f160bc37e6e',
   status: 'pending',
@@ -14,4 +20,5 @@ const taskReturnedForDb = {
 module.exports = {
   taskToDb,
   taskReturnedForDb,
+  taskToDbWithOutStatus,
 };

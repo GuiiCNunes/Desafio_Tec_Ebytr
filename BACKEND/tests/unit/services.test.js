@@ -38,4 +38,11 @@ describe('Service tests:', () => {
       expect(response).to.have.a.property('status');
     });
   });
+
+  describe('Test if a wrong task status ', () => {
+    it('return null', async () => {
+      const response = await tasksServices.create(payloads.taskToDbWithOutStatus);
+      expect(response).to.be.a('null');
+    });
+  });
 });
