@@ -75,4 +75,20 @@ describe('Integration tests: ', () => {
       expect(response.body).to.have.property('message');
     });
   });
+  describe('get all tasks', () => {
+    let response = {};
+
+    before(async () => {
+      response = await chai.request(server)
+        .get('/tasks');
+    });
+
+    it('return http code 200', () => {
+      expect(response).to.have.status(200);
+    });
+
+    it('return an array', () => {
+      expect(response.body).to.be.an('array');
+    });
+  });
 });
