@@ -97,7 +97,7 @@ describe('Service tests:', () => {
         tasksModel.deleteTask.restore();
       });
 
-      it('altered database', async () => {
+      it('dont\'t altered database', async () => {
         const response = await tasksServices.deleteTask(payloads.example_id);
         expect(response).to.be.equal(false);
       });
