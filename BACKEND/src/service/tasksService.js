@@ -23,7 +23,7 @@ const deleteTask = async (id) => {
   return false;
 };
 
-const update = async ({ _id: id, status, content, date }) => {
+const update = async ({ id, status, content, date }) => {
   const { result } = await tasksModel.update({ id, status, content, date });
   if (result.n) return true;
   return false;
