@@ -6,6 +6,12 @@ const taskToDb = {
   status: 'pending',
 };
 
+const newTaskToDb = {
+  content: 'Make a awesome task',
+  date: Date.now(),
+  status: 'progress',
+};
+
 const taskToDbWithOutStatus = {
   content: 'Make a beatiful task',
   date: Date.now(),
@@ -36,4 +42,5 @@ module.exports = {
   example_id,
   correctDbReturnToDelete,
   incorrectDbReturnToDelete,
+  newTaskToDb,
 };
