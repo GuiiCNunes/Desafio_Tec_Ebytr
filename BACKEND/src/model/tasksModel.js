@@ -12,8 +12,14 @@ const getAll = () => mongoConnection.getConnection()
 const getTaskById = (id) => mongoConnection.getConnection()
 .then((db) => db.collection('tasks').findOne({ _id: ObjectId(id) }));
 
+const deleteTask = (id) => mongoConnection.getConnection()
+.then((db) => db.collection('tasks').deleteOne(
+  { _id: ObjectId(id) },
+));
+
 module.exports = {
   create,
   getAll,
   getTaskById,
+  deleteTask,
 };

@@ -70,4 +70,13 @@ describe('Model tests: ', () => {
       expect(ObjectId(response._id).toString()).to.have.be.equals(ObjectId(id).toString());
     });
   });
+  describe('Test delete task ', () => {
+    it('delete task by id: ', async () => {
+      const { _id: id } = await tasksModel.create(payloads.taskToDb);
+
+      const { result } = await tasksModel.deleteTask(id);
+    
+      expect(result.n).to.be.equals(1);
+    });
+  });
 });
