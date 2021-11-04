@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const mongoConnection = require('../../src/model/connection');
@@ -48,6 +48,26 @@ describe('Model tests: ', () => {
     it('has status', async () => {
       const response = await tasksModel.create(payloads.taskToDb);
       expect(response).to.have.a.property('status');
+    });
+  });
+
+  describe('Test get tasks ', () => {
+    it('you get three tasks: ', async () => {
+      await tasksModel.create(payloads.taskToDb);
+      await tasksModel.create(payloads.taskToDb);
+      await tasksModel.create(payloads.taskToDb);
+
+      const response = await tasksModel.getAll();
+    
+      expect(response).to.be.an('array');
+      expect(response.length).to.be.equal(3);
+    });
+    it('get task by id: ', async () => {
+      const { _id: id } = await tasksModel.create(payloads.taskToDb);
+
+      const response = await tasksModel.getTaskById(id);
+    
+      expect(ObjectId(response._id).toString()).to.have.be.equals(ObjectId(id).toString());
     });
   });
 });
