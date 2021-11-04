@@ -60,7 +60,7 @@ describe('Controller tests: ', () => {
 
     it('passed error', async () => {
       await tasksControllers.create(request, response, next);
-      const call = { status: 400, message: 'empty data' };
+      const call = { code: 400, message: 'empty data' };
       expect(next.calledWith(call)).to.be.equal(true);
     });
   });

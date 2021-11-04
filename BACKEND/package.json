@@ -2,7 +2,7 @@
   "name": "task_manager",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/api/server.js",
   "scripts": {
     "test": "mocha ./tests/**/*$NAME*.{test,spec}.js --exit",
     "start": "node .",
