@@ -39,7 +39,7 @@ describe('Integration tests: ', () => {
     before(async () => {
       response = await chai.request(server)
         .post('/tasks')
-        .send(payloads.taskToDb);
+        .send(payloads.taskReturnedForDb);
     });
 
     it('return http code 201', () => {
@@ -88,7 +88,47 @@ describe('Integration tests: ', () => {
     });
 
     it('return an array', () => {
+      console.log(response.body);
       expect(response.body).to.be.an('array');
+    });
+  });
+
+  describe('when a task deleted', () => {
+    let response = {};
+
+    before(async () => {
+      const { _id: id } = await mongoConnection.getConnection()
+        .then((db) => db.collection('tasks').insertOne(payloads.taskToDb))
+        .then(({ insertedId: _id }) => ({ _id, status, content, date }));
+
+      response = await chai.request(server)
+        .delete('/tasks')
+        .send({ id });
+    });
+
+    it('return http code 200', () => {
+      expect(response).to.have.status(200);
+    });
+  });
+  describe('when a task aren\'t deleted', () => {
+    let response = {};
+
+    before(async () => {
+      response = await chai.request(server)
+        .delete('/tasks')
+        .send({ id: payloads.random_id });
+    });
+
+    it('return http code 404', () => {
+      expect(response).to.have.status(404);
+    });
+
+    it('return an object', () => {
+      expect(response.body).to.be.a('object');
+    });
+
+    it('the object has a property message', () => {
+      expect(response.body).to.have.property('message');
     });
   });
 });
