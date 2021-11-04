@@ -25,8 +25,16 @@ const deleteTask = async (req, res, next) => {
   next({ code: 404, message: 'not found' });
 };
 
+const update = async (req, res, next) => {
+  const { id, status, content, date } = req.body;
+  if (await tasksServices.update({ id, status, content, date })) return res.status(200).end();
+
+  next({ code: 404, message: 'not found' });
+};
+
 module.exports = {
   create,
   getAll,
   deleteTask,
+  update,
 };
