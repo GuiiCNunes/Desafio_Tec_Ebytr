@@ -1,5 +1,4 @@
 const example_id = '6182fdfbfe472f160bc37e6e';
-const random_id = '6182fdfbgr472f160bc37e6e';
 
 const taskToDb = {
   content: 'Make a beatiful task',
@@ -37,5 +36,4 @@ module.exports = {
   example_id,
   correctDbReturnToDelete,
   incorrectDbReturnToDelete,
-  random_id,
 };

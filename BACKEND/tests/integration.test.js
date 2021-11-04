@@ -8,6 +8,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const server = require('../src/api/app');
 const payloads = require('./payloadTasks');
 const mongoConnection = require('../src/model/connection');
+const tasksServices = require('../src/service/tasksService');
 
 chai.use(chaiHttp);
 
@@ -88,19 +89,15 @@ describe('Integration tests: ', () => {
     });
 
     it('return an array', () => {
-      console.log(response.body);
       expect(response.body).to.be.an('array');
     });
   });
 
   describe('when a task deleted', () => {
     let response = {};
-
     before(async () => {
-      const { _id: id } = await mongoConnection.getConnection()
-        .then((db) => db.collection('tasks').insertOne(payloads.taskToDb))
-        .then(({ insertedId: _id }) => ({ _id, status, content, date }));
-
+      const { _id: id } = await tasksServices.create(payloads.taskToDb);
+      
       response = await chai.request(server)
         .delete('/tasks')
         .send({ id });
@@ -116,7 +113,7 @@ describe('Integration tests: ', () => {
     before(async () => {
       response = await chai.request(server)
         .delete('/tasks')
-        .send({ id: payloads.random_id });
+        .send({ id: payloads.example_id });
     });
 
     it('return http code 404', () => {
