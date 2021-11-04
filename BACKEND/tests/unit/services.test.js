@@ -10,10 +10,16 @@ describe('Service tests:', () => {
   
     sinon.stub(tasksModel, 'create')
       .resolves(payloads.taskReturnedForDb);
+    sinon.stub(tasksModel, 'getAll')
+      .resolves(payloads.allTasks);
+    sinon.stub(tasksModel, 'getTaskById')
+      .resolves(payloads.taskReturnedForDb);
   });
 
   after(() => {
     tasksModel.create.restore();
+    tasksModel.getAll.restore();
+    tasksModel.getTaskById.restore();
   });
 
   describe('Test if a task ', () => {
@@ -43,6 +49,23 @@ describe('Service tests:', () => {
     it('return null', async () => {
       const response = await tasksServices.create(payloads.taskToDbWithOutStatus);
       expect(response).to.be.a('null');
+    });
+  });
+
+  describe('Test if get tasks: ', () => {
+    it('get all tasks: ', async () => {
+      const response = await tasksServices.getAll();
+    
+      expect(response).to.be.an('array');
+      expect(response.length).to.be.equal(3);
+    });
+    it('get task by id', async () => {
+      const response = await tasksServices.getTaskById(payloads.example_id);
+      expect(response).to.be.an('object');
+      expect(response).to.have.a.property('_id');
+      expect(response).to.have.a.property('content');
+      expect(response).to.have.a.property('status');
+      expect(response).to.have.a.property('date');
     });
   });
 });
