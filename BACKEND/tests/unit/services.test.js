@@ -104,4 +104,39 @@ describe('Service tests:', () => {
     });
   });
 
+  describe('Test update task: ', () => {
+    describe('with correct data', () => {
+      before(() => {
+  
+        sinon.stub(tasksModel, 'update')
+          .resolves(payloads.correctDbReturnToDelete);
+      });
+    
+      after(() => {
+        tasksModel.update.restore();
+      });
+
+      it('task has updated ', async () => {
+        const response = await tasksServices.update({ ...payloads.newTaskToDb, id: payloads.example_id });
+        expect(response).to.be.equal(true);
+      });
+    });
+    describe('with incorrect data', () => {
+      before(() => {
+  
+        sinon.stub(tasksModel, 'update')
+          .resolves(payloads.incorrectDbReturnToDelete);
+      });
+    
+      after(() => {
+        tasksModel.update.restore();
+      });
+
+      it('task hasn\'t updated ', async () => {
+        const response = await tasksServices.update({ ...payloads.newTaskToDb, id: payloads.example_id });
+        expect(response).to.be.equal(false);
+      });
+    });
+  });
+
 });
