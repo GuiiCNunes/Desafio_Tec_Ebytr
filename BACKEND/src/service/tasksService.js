@@ -6,6 +6,18 @@ const create = async ({ status, content, date }) => {
   return response;
 };
 
+const getAll = async () => {
+  const response = await tasksModel.getAll();
+  return response;
+};
+
+const getTaskById = async (id) => {
+  const response = await tasksModel.getTaskById(id);
+  return response;
+};
+
 module.exports = {
   create,
+  getAll,
+  getTaskById,
 };

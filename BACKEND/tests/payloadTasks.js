@@ -1,3 +1,5 @@
+const example_id = '6182fdfbfe472f160bc37e6e';
+
 const taskToDb = {
   content: 'Make a beatiful task',
   date: Date.now(),
@@ -17,8 +19,16 @@ const taskReturnedForDb = {
   date: 1635974651743,
 };
 
+const allTasks = [
+  taskReturnedForDb,
+  taskReturnedForDb,
+  taskReturnedForDb,
+];
+
 module.exports = {
   taskToDb,
   taskReturnedForDb,
   taskToDbWithOutStatus,
+  allTasks,
+  example_id,
 };
