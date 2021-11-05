@@ -6,6 +6,7 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const SET_EDIT_TASK = 'SET_EDIT_TASK';
 export const ADD_TASK = 'ADD_TASK';
 export const EDIT_TASK = 'EDIT_TASK';
+export const SORT_TASKS = 'SORT_TASKS';
 
 export const getTasks = () => async (dispatch) => {
   try {
@@ -84,4 +85,11 @@ export const editTask = (task) => async (dispatch) => {
       error,
     });
   }
+};
+
+export const sortTasks = (sort) => async (dispatch) => {
+  dispatch({
+    type: SORT_TASKS,
+    payload: sort,
+  });
 };
