@@ -73,7 +73,7 @@
 
 ## Arquitetura
 
-  A arquitetura utilizada foi a proposta no desafio, **MSV**. Tendo a Stack [MERN](https://www.mongodb.com/mern-stack) como orientação.
+  A arquitetura utilizada foi a proposta no desafio, **MSC**. Tendo a Stack [MERN](https://www.mongodb.com/mern-stack) como orientação.
 
   A organização dos diretórios se deu como:
 
