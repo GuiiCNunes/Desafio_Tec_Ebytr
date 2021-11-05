@@ -3,6 +3,7 @@ import Services from '../../services';
 export const GET_TASKS = 'GET_TASKS';
 export const SET_ERROR = 'SET_ERROR';
 export const DELETE_TASK = 'DELETE_TASK';
+export const SET_EDIT_TASK = 'SET_EDIT_TASK';
 
 export const getTasks = () => async (dispatch) => {
   try {
@@ -27,6 +28,20 @@ export const deleteTask = (id) => async (dispatch) => {
     dispatch({
       type: DELETE_TASK,
       payload: id,
+    });
+  } catch (error) {
+    dispatch({
+      type: SET_ERROR,
+      error,
+    });
+  }
+};
+
+export const setEditTask = (task) => (dispatch) => {
+  try {
+    dispatch({
+      type: SET_EDIT_TASK,
+      payload: task,
     });
   } catch (error) {
     dispatch({

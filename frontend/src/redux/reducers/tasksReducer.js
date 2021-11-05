@@ -2,6 +2,7 @@ import {
   GET_TASKS,
   DELETE_TASK,
   SET_ERROR,
+  SET_EDIT_TASK,
 } from '../actions';
 
 const initialState = {
@@ -31,6 +32,11 @@ const tasksReducer = (state = initialState, { type, payload, error }) => {
       return {
         ...state,
         error,
+      };
+    case SET_EDIT_TASK:
+      return {
+        ...state,
+        taskToEdit: payload,
       };
     default:
       return state;

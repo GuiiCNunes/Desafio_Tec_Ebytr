@@ -1,31 +1,35 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../redux/actions';
+import { deleteTask, setEditTask } from '../redux/actions';
 
-function taskCard(dataReceiv) {
+function taskCard(task) {
   const dispatch = useDispatch();
-  const { _id: id } = dataReceiv;
+  const { _id: id } = task;
 
   const handleDelete = () => {
     dispatch(deleteTask(id));
+  };
+
+  const handleEdit = () => {
+    dispatch(setEditTask(task));
   };
 
   return (
     <article>
       <p>
         Data:
-        {dataReceiv.date}
+        {task.date}
       </p>
       <p>
         Tarefa:
-        {dataReceiv.content}
+        {task.content}
       </p>
       <p>
         Status:
-        {dataReceiv.status}
+        {task.status}
       </p>
       <section>
-        <button type="button">Editar</button>
+        <button type="button" onClick={handleEdit}>Editar</button>
         <button type="button" onClick={handleDelete}>Apagar</button>
       </section>
     </article>
