@@ -5,6 +5,7 @@ import {
   SET_EDIT_TASK,
   ADD_TASK,
   EDIT_TASK,
+  SORT_TASKS,
 } from '../actions';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   taskToEdit: {},
   error: {},
   loading: false,
+  sortBy: '',
 };
 
 const tasksReducer = (state = initialState, { type, payload, error }) => {
@@ -57,6 +59,11 @@ const tasksReducer = (state = initialState, { type, payload, error }) => {
         ),
       };
     }
+    case SORT_TASKS:
+      return {
+        ...state,
+        sortBy: payload,
+      };
     default:
       return state;
   }
