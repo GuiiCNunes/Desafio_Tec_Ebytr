@@ -26,7 +26,7 @@ const deleteTask = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const { id, status, content, date } = req.body;
+  const { _id: id, status, content, date } = req.body;
   if (await tasksServices.update({ id, status, content, date })) return res.status(200).end();
 
   next({ code: 404, message: 'not found' });
