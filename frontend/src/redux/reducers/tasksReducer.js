@@ -3,6 +3,8 @@ import {
   DELETE_TASK,
   SET_ERROR,
   SET_EDIT_TASK,
+  ADD_TASK,
+  EDIT_TASK,
 } from '../actions';
 
 const initialState = {
@@ -28,6 +30,11 @@ const tasksReducer = (state = initialState, { type, payload, error }) => {
         error: {},
       };
     }
+    case ADD_TASK:
+      return {
+        ...state,
+        tasks: [...state.tasks, payload],
+      };
     case SET_ERROR:
       return {
         ...state,
@@ -38,6 +45,18 @@ const tasksReducer = (state = initialState, { type, payload, error }) => {
         ...state,
         taskToEdit: payload,
       };
+    case EDIT_TASK: {
+      const { _id: id } = payload;
+      return {
+        ...state,
+        tasks: state.tasks.map(
+          (task) => {
+            const { _id } = task;
+            return _id === id ? payload : task;
+          },
+        ),
+      };
+    }
     default:
       return state;
   }
