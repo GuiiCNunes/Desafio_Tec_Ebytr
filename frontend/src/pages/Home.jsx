@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import FormTask from '../components/formTask';
 import taskCard from '../components/taskCard';
 import { getTasks } from '../redux/actions';
 
@@ -17,6 +18,9 @@ function Home() {
       <section>
         { tasks.map((task) => taskCard(task)) }
       </section>
+      <nav>
+        <FormTask />
+      </nav>
     </main>
   );
 }

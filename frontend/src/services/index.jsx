@@ -7,7 +7,7 @@ const getTasks = () => axios.get(URL).then(({ data }) => data);
 const addTask = (task) => axios({
   method: 'post',
   url: URL,
-  data: { task },
+  data: task,
 });
 
 const deleteTask = (id) => axios({
@@ -19,7 +19,7 @@ const deleteTask = (id) => axios({
 const updateTask = (task) => axios({
   method: 'put',
   url: URL,
-  body: { task },
+  data: task,
 });
 
 export default {
