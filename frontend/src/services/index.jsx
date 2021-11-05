@@ -1,20 +1,25 @@
-const URL = 'localhost:3000/tasks';
+import axios from 'axios';
 
-const getTasks = () => fetch(URL).then((data) => data.json());
+const URL = 'http://localhost:3000/tasks';
 
-const addTask = (task) => fetch(URL, {
-  method: 'POST',
-  body: task,
+const getTasks = () => axios.get(URL).then(({ data }) => data);
+
+const addTask = (task) => axios({
+  method: 'post',
+  url: URL,
+  data: { task },
 });
 
-const deleteTask = (id) => fetch(URL, {
-  method: 'DELETE',
-  body: id,
+const deleteTask = (id) => axios({
+  method: 'delete',
+  url: URL,
+  data: { id },
 });
 
-const updateTask = (task) => fetch(URL, {
-  method: 'PUT',
-  body: task,
+const updateTask = (task) => axios({
+  method: 'put',
+  url: URL,
+  body: { task },
 });
 
 export default {
